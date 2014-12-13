@@ -44,3 +44,5 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 gem "bcrypt-ruby", :require => "bcrypt"
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'

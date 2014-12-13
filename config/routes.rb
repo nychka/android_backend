@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :groups
+
+  resources :products
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'welcome/index'
 
   get 'log_out' => 'sessions#destroy', :as => 'log_out'
