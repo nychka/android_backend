@@ -14,5 +14,6 @@ ActiveAdmin.register Product do
   #   permitted
   # end
 
+  permit_params :title, :calories, :fats, :proteins, :carbohydrates, :image, :group_id
 
 end
