@@ -10,6 +10,7 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'rack-utf8_sanitizer'
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
