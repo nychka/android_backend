@@ -47,3 +47,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'multilang-hstore', '~> 1.0.0'

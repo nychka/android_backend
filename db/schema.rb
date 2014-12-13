@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213153638) do
+ActiveRecord::Schema.define(version: 20141213191758) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -24,9 +28,9 @@ ActiveRecord::Schema.define(version: 20141213153638) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -43,19 +47,20 @@ ActiveRecord::Schema.define(version: 20141213153638) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "groups", force: true do |t|
-    t.string   "title"
+    t.hstore   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "groups", ["title"], name: "index_groups_on_title"
+  add_index "groups", ["title"], name: "groups_gist_title", using: :gist
+  add_index "groups", ["title"], name: "index_groups_on_title", using: :btree
 
   create_table "products", force: true do |t|
-    t.string   "title"
+    t.hstore   "title"
     t.integer  "calories"
     t.integer  "fats"
     t.integer  "proteins"
@@ -66,7 +71,8 @@ ActiveRecord::Schema.define(version: 20141213153638) do
     t.datetime "updated_at"
   end
 
-  add_index "products", ["group_id"], name: "index_products_on_group_id"
+  add_index "products", ["group_id"], name: "index_products_on_group_id", using: :btree
+  add_index "products", ["title"], name: "products_gist_title", using: :gist
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -77,6 +83,6 @@ ActiveRecord::Schema.define(version: 20141213153638) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["auth_token"], name: "index_users_on_auth_token"
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree
 
 end
