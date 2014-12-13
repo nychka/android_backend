@@ -231,3 +231,4 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 end
+class HstoreInput < Formtastic::Inputs::TextInput; end

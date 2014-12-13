@@ -48,4 +48,4 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'multilang-hstore', '~> 1.0.0'
-gem 'activerecord-postgres-hstore'
+#gem 'activerecord-postgres-hstore'
