@@ -3,6 +3,6 @@ class ChangeProductsTitleToHstore < ActiveRecord::Migration
     change_column :products, :title, 'hstore USING CAST(title AS hstore)'
   end
   def self.down
-    change_column :products, :title, 'string USING CAST(title AS string)'
+    change_column :products, :title, :string
   end
 end
