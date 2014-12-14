@@ -5,6 +5,8 @@ ruby '2.0.0'
 gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
 group :test, :development do
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 group :production do
   gem 'pg'

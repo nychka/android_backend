@@ -1,16 +1,22 @@
 ua:
-  site_phrase: 'які я б хотів'
-  submit_text: 'Втілити в життя'
   edit: 'Редагувати'
   back: 'Назад'
   destroy: 'Знищити'
-  add_new_wish: 'Добавити бажання'
   log_out: 'Вийти'
   sign_in: 'Увійти'
   sign_up: 'Зареєструватись'
   registration: 'Реєстрація'
   login: 'Вхід'
-  forgot_your_password?: 'Забув пароль?'
+  forgot_your_password?: 'Забули пароль? Не біда'
   home: 'На початок'
   remember_me: "Запам'ятати мене"
-  categories: 'Категорії бажань'
+  submit_text: 'Підтвердити'
+  category:
+    title: 'Назва категорії'
+  product:
+    new: 'Добавити продукт'
+    title: 'Назва продукту'
+    calories: 'Кіл-ть калорій на 100 грам'
+    fats: 'жири'
+    proteins: 'протеїни'
+    carbohydrates: 'вуглеводи'
