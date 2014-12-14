@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  site_phrase: 'I would wish'
+  submit_text: 'Bring to life'
+  edit: 'Edit'
+  back: 'Back'
+  destroy: 'Destroy'
+  add_new_wish: 'Add new wish'
+  log_out: 'Log out'
+  sign_in: 'Sign in'
+  sign_up: 'Зареєструватись'
+  registration: 'Sign up'
+  login: 'Sign in'
+  forgot_your_password?: 'Forgot your password?'
+  home: 'Home'
+  remember_me: "Remember me"
+  categories: 'Categories of wishes'
+  start: 'Start'
+  finish: 'Finish'

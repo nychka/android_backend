@@ -5,7 +5,6 @@ ruby '2.0.0'
 gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
 group :test, :development do
-  gem 'sqlite3'
 end
 group :production do
   gem 'pg'
@@ -45,7 +44,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 gem "bcrypt-ruby", :require => "bcrypt"
-gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'multilang-hstore', '~> 1.0.0'
-#gem 'activerecord-postgres-hstore'
+gem 'simple_form'

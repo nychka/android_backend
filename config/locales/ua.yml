@@ -1,0 +1,16 @@
+ua:
+  site_phrase: 'які я б хотів'
+  submit_text: 'Втілити в життя'
+  edit: 'Редагувати'
+  back: 'Назад'
+  destroy: 'Знищити'
+  add_new_wish: 'Добавити бажання'
+  log_out: 'Вийти'
+  sign_in: 'Увійти'
+  sign_up: 'Зареєструватись'
+  registration: 'Реєстрація'
+  login: 'Вхід'
+  forgot_your_password?: 'Забув пароль?'
+  home: 'На початок'
+  remember_me: "Запам'ятати мене"
+  categories: 'Категорії бажань'

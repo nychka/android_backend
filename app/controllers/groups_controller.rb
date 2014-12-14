@@ -1,5 +1,5 @@
-class GroupsController < InheritedResources::Base
-
+class GroupsController < ApplicationController
+  before_action :authenticate_user!
   private
 
     def group_params

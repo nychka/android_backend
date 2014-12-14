@@ -1,23 +1,14 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :groups
 
   resources :products
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   get 'welcome/index'
 
-  get 'log_out' => 'sessions#destroy', :as => 'log_out'
-  get 'log_in' => 'sessions#new', :as => 'log_in'
-  get 'sign_up' => 'users#new', :as => 'sign_up'
-  get 'authorize' => 'welcome#authorize', :as => 'authorize'
-
   root :to => 'welcome#index'
-
-  resources :users
-  resources :sessions
-
+  
   namespace :api do
     namespace :v1 do
       post 'tokens' => 'tokens#create', :as => 'login'
