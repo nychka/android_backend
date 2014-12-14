@@ -32,6 +32,7 @@ en:
   home: 'Home'
   remember_me: "Remember me"
   submit_text: 'Create'
+  settings: 'Settings'
   category: 
     title: 'category'
   product:

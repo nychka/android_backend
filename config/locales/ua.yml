@@ -11,6 +11,7 @@ ua:
   home: 'На початок'
   remember_me: "Запам'ятати мене"
   submit_text: 'Підтвердити'
+  settings: 'Налаштування'
   category:
     title: 'Назва категорії'
   product:
