@@ -14,7 +14,7 @@
   <div class="form-inputs">
     <%= f.association :group, collection: @groups, selected: lambda { |v|v.last == f.object.group_id}, input_html: {class: 'form-control'}, label: t('category.title') %>
   </div>
-  <% @available_locales.each do |locale| %>
+  <% available_locales.each do |locale| %>
   <div class="form-inputs">
     <%= f.input "title_#{locale}".to_sym, as: :string, input_html: {class: 'form-control'},
      label: "#{t('product.title')}[#{locale.to_s}]" %>

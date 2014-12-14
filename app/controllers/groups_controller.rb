@@ -53,13 +53,14 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   private
+   
     def set_group
       @group = Group.find(params[:id])
     end
     def group_params
-      params.require(:group).permit(:title)
+      permitted = available_locales.map {|locale| "title_#{locale.to_s}".to_sym }
+      params.require(:group).permit(permitted)
     end
 end
 

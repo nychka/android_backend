@@ -59,12 +59,8 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
-    def available_locales
-      [:en, :ua]
-    end
     def set_groups
       @groups = Group.all.map {|item|[item.title.any, item.id]}
-      @available_locales = available_locales
     end
     def product_params
       permitted = [:calories, :fats, :proteins, :carbohydrates, :image, :group_id]
