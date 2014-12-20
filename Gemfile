@@ -5,8 +5,19 @@ ruby '2.0.0'
 gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
 group :test, :development do
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rspec', '>= 3.1.0'
+  gem 'rspec-rails', '>= 3.1.0'
+  gem 'database_cleaner'  
+  gem 'factory_girl_rails', '>= 4.2.0'
+  gem 'capybara', '>= 2.0.3'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'cucumber-rails', :require => false
+  gem 'autotest'
+  gem 'autotest-notification'
+  gem 'faker'
 end
 group :production do
   gem 'pg'
@@ -45,7 +56,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem "bcrypt-ruby", :require => "bcrypt"
+gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'devise'
 gem 'multilang-hstore', '~> 1.0.0'
 gem 'simple_form'
+gem 'settingslogic', '>= 2.0.9'
