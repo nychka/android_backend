@@ -4,6 +4,10 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Group.all
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @groups, each_serializer: get_serializer_for(:group)}
+    end
   end
   def new
     @group = Group.new
@@ -26,6 +30,10 @@ class GroupsController < ApplicationController
   # GET /steps/1
   # GET /steps/1.json
   def show
+    respond_to do |format|
+      format.html {render :show, location: @group}
+      format.json {render json: @group, serializer: get_serializer_for(:group)}
+    end
   end
    # GET /steps/1/edit
   def edit

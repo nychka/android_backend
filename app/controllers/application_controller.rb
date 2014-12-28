@@ -7,6 +7,24 @@ class ApplicationController < ActionController::Base
   helper_method :available_locales
   respond_to :json, :html
 
+  protected
+
+  # OPTIMIZE: 
+  # - add strategy for parsing params
+  # - extend serializing logic
+  def get_serializer_for(model)
+    model = model.to_s.capitalize
+    relations = model.constantize.reflections.keys
+    relation = params[:include] if params[:include].present? && relations.include?(params[:include].to_sym)
+
+    if relation
+     serializer = "#{model}WithEmbedded#{relation.capitalize}Serializer"
+    else
+     serializer = "#{model}Serializer"
+    end
+    serializer.constantize
+  end
+
   private
   #TODO: винести в Settings
   def available_locales;  [:en, :ua] ; end

@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @products, each_serializer: get_serializer_for(:product)}
+    end
   end
   def new
     @product = Product.new
@@ -27,6 +31,10 @@ class ProductsController < ApplicationController
   # GET /steps/1
   # GET /steps/1.json
   def show
+    respond_to do |format|
+      format.html {render :show, location: @product}
+      format.json {render json: @product, serializer: get_serializer_for(:product)}
+    end
   end
    # GET /steps/1/edit
   def edit
