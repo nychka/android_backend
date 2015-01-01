@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_groups, only: [:new, :edit]
 
   def index
-    @products = Product.all
+    @products = current_user ? Product.system_with_owner(current_user.id) : Product.system
     respond_to do |format|
       format.html {render :index}
       format.json {render json: @products, each_serializer: get_serializer_for(:product)}

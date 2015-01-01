@@ -6,9 +6,10 @@ describe ProductsController, type: :controller do
       before(:each) do
         @products, @product_count = [], 3
         @product_count.times do
-          product = FactoryGirl.create(:product)
+          product = FactoryGirl.create(:system_product)
           @products << product.as_json.delete_if{|k,v|k == 'created_at' || k == 'updated_at'}
         end
+        @products.reverse!
       end
       it "fails to create product as unauthorized user" do
         product = FactoryGirl.build(:product)
@@ -23,6 +24,13 @@ describe ProductsController, type: :controller do
         data = JSON.parse(response.body)
         expect(data).to be_a_kind_of Array
         expect(data.length).to eq @product_count
+        expect(data).to eq @products
+      end
+      it "gets only system products" do
+        expect{ FactoryGirl.create_list(:product, 3) }.to change(Product, :count).by(3)
+        get :index, format: :json
+        data = JSON.parse(response.body)
+        expect(Product.count).to eq 6
         expect(data).to eq @products
       end
     end
