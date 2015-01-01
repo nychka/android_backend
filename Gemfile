@@ -18,6 +18,9 @@ group :test, :development do
   gem 'autotest'
   gem 'autotest-notification'
   gem 'faker'
+  gem 'spork-rails'
+  gem 'guard-rspec', require: false
+  gem 'guard-spork'
 end
 group :production do
   gem 'pg'
