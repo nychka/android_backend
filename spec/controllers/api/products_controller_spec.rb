@@ -61,6 +61,15 @@ describe ProductsController, type: :controller do
           expect(data['error']).to match 'You need to sign in or sign up before continuing.'
         end
       end
+      context "authorized request" do
+        it "creates product" do
+          user = login_user
+          product = FactoryGirl.attributes_for(:product, user_id: user.id)
+          expect{ post :create, {format: :json, product: product} }.to change(Product, :count).by(1)
+          expect(response.status).to eq 201
+          expect(Product.last.user_id).to eq user.id
+        end
+      end
     end
   end
 end
