@@ -6,9 +6,13 @@ class ApplicationController < ActionController::Base
   acts_as_token_authentication_handler_for User, except: [:index]
   helper_method :available_locales
   respond_to :json, :html
+  before_action :set_response
+  before_action :set_locale, only: [:index]
 
   protected
-
+  def markdown(string)
+    RDiscount.new(string).to_html.html_safe
+  end
   # OPTIMIZE: 
   # - add strategy for parsing params
   # - extend serializing logic
@@ -23,6 +27,17 @@ class ApplicationController < ActionController::Base
      serializer = "#{model}Serializer"
     end
     serializer.constantize
+  end
+  def set_response
+    @response = {}
+  end
+  def set_locale
+    begin
+      I18n.locale = params[:lang].present? ? params[:lang] : I18n.default_locale
+    rescue Exception => e
+      @response[:errors] = [e.message]
+      @response[:status] = :unprocessable_entity
+    end
   end
 
   private
