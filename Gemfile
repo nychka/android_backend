@@ -66,4 +66,4 @@ gem 'simple_form'
 gem 'settingslogic', '>= 2.0.9'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
-gem 'rdiscount', require: true
+gem 'rdiscount'

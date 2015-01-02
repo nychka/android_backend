@@ -51,6 +51,12 @@ describe ProductsController, type: :controller do
           data = JSON.parse(response.body)
           expect(data.first['title']).to eq 'apple'
         end
+        it "gets unprocessible localization for product" do
+          get :index, format: :json, lang: :zz
+          data = JSON.parse(response.body)
+          expect(response.status).to eq 422
+          expect(data['errors'][0]).to match 'is not a valid locale'
+        end
       end
       context "unauthorized request" do
         it "gets a list of system products" do
