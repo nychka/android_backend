@@ -3,10 +3,22 @@ class ProductsController < ApplicationController
   before_action :set_groups, only: [:new, :edit]
 
   def index
+    begin
+      @errors = []
+      I18n.locale = params[:lang].present? ? params[:lang] : I18n.default_locale
+    rescue Exception => e
+      @errors << e.message
+      response_with_error = {status: :unprocessable_entity, errors: @errors}
+    end
     @products = current_user ? Product.system_with_owner(current_user.id) : Product.system
     respond_to do |format|
-      format.html {render :index}
-      format.json {render json: @products, each_serializer: get_serializer_for(:product)}
+      if @errors.empty?
+        format.html { render :index }
+        format.json { render json: @products, each_serializer: get_serializer_for(:product) }
+      else 
+        format.html { render :index, notice: 'Something nasty happened...'}
+        format.json { render json: response_with_error, status: :unprocessable_entity }
+      end
     end
   end
   def new

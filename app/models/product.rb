@@ -7,4 +7,8 @@ class Product < ActiveRecord::Base
   scope :system,      ->{ where('user_id = 0') }
   scope :system_with_owner, ->(user_id){ where('user_id = 0 OR user_id = ?', user_id) }
   scope :by_users,    ->{ where('user_id > 0') }
+
+  def owner
+    user_id && user_id > 0
+  end
 end

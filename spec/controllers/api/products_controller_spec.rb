@@ -4,9 +4,10 @@ describe ProductsController, type: :controller do
   context "API" do
     context "GET /products" do
       before(:each) do
-        products, @product_count = [], 3
-        @product_count.times { products << FactoryGirl.create(:system_product) }
-        @products = format_data(products)
+        @products, @product_count = [], 3
+        @product_count.times do
+         @products << ProductSerializer.new(FactoryGirl.create(:system_product)).attributes.stringify_keys
+        end
       end
       context "common" do
         it "gets status 200" do
@@ -16,11 +17,39 @@ describe ProductsController, type: :controller do
         it "includes group" do
           group = FactoryGirl.create(:group)
           products = [FactoryGirl.create(:system_product,group_id: group.id)]
-          items = format_data(products).concat(@products)
           get :index, {format: :json, include: 'group'}
           data = JSON.parse(response.body)
           group_item = data[0]['group']
-          expect(format_item(group_item)).to eq format_item(group)
+          expect(group_item['id']).to eq group.id
+        end
+        it "shows attribute :owner in reponse" do
+          user = login_user
+          products = FactoryGirl.create_list(:product, 2, user_id: user.id)
+          get :index, format: :json
+          data = JSON.parse(response.body)
+          expect(data.first['owner']).to be true
+          expect(data.last['owner']).to be false
+        end
+      end
+      context "localization" do
+        before(:each) do
+          FactoryGirl.create(:system_product, title_en: 'apple', title_ua: 'яблуко')
+        end
+        it "gets english localization for product" do
+          get :index, format: :json, lang: :en
+          data = JSON.parse(response.body)
+          expect(data.count).to eq 4
+          expect(data.first['title']).to eq 'apple'
+        end
+        it "gets ukrainian localization for product" do
+          get :index, format: :json, lang: :ua
+          data = JSON.parse(response.body)
+          expect(data.first['title']).to eq 'яблуко'
+        end
+        it "gets default localization for product" do
+          get :index, format: :json, lang: :fr
+          data = JSON.parse(response.body)
+          expect(data.first['title']).to eq 'apple'
         end
       end
       context "unauthorized request" do
@@ -29,25 +58,27 @@ describe ProductsController, type: :controller do
           data = JSON.parse(response.body)
           expect(data).to be_a_kind_of Array
           expect(data.length).to eq @product_count
-          expect(data).to eq @products
+          expect(data).to match_array @products
         end
         it "gets ONLY a list of system products" do
           FactoryGirl.create_list(:product, 3)
           get :index, format: :json
           data = JSON.parse(response.body)
           expect(Product.count).to eq 6
-          expect(data).to eq @products
+          expect(data).to match_array @products
         end
       end
       context "authorized request" do
         it "gets a list of products together with system" do
           user = login_user
-          user_products = FactoryGirl.create_list(:product, 3, user_id: user.id)
-          items = format_data(user_products).concat(@products)
+          user_products = FactoryGirl.create_list(:product, 3, user_id: user.id).map do |product|
+            ProductSerializer.new(product).attributes.stringify_keys
+          end
+          items = user_products.concat(@products)
           get :index, format: :json
           data = JSON.parse(response.body)
           expect(Product.count).to eq 6
-          expect(data).to eq items
+          expect(data).to match_array items
         end
       end
     end
