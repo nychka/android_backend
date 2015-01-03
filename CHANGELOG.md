@@ -3,7 +3,6 @@
 - add common response format
 
 ### Admin
-- CRUD system products and groups
 - design product page
 - design group page
 - add icon for group
@@ -11,6 +10,7 @@
 ## 0.0.2 / 2014-03-15
 ### Admin
 - add roles: user, manager, admin
+- CRUD system products
 
 ## 0.0.1 / 2014-02-15
 ### API

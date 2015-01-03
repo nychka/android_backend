@@ -22,15 +22,22 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-    authorize! :create, @product
+    authorize! :create, Product.new
+    
+    if current_user.admin? || current_user.manager?
+      @product = Product.new(product_params) 
+      @product.user_id = 0
+    else
+      @product = current_user.products.build product_params
+    end
+
     respond_to do |format|
-      if @product.save and current_user.products << @product
+      if @product.save
         format.html { redirect_to @product, flash: { success: 'Product was successfully created.' }}
         format.json { render :show, status: :created, location: @product }
       else
         @response[:status] = :unprocessable_entity
-        @response[:errors] = @products.errors
+        @response[:errors] = @product.errors
         format.html { render :new }
         format.json { render json: @response, status: @response[:status] }
       end
@@ -73,14 +80,14 @@ class ProductsController < ApplicationController
 
   private
     def get_products
-      role = current_user ? current_user.role : :guest
-      case role
-        when :manager || :admin
+      if current_user
+        if current_user.manager? || current_user.admin?
           @products = Product.all
-        when :user
-          @products = Product.system_with_owner(current_user.id)
         else
-          @products = Product.system
+          @products = Product.system_with_owner(current_user.id)
+        end 
+      else
+         @products = Product.system
       end
     end
     def set_product
