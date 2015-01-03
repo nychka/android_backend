@@ -6,4 +6,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :products
+  belongs_to  :role
+
+  def role
+    Role.find(role_id).role.to_sym if role_id
+  end
+  def role? role
+    role = Role.find_by_role(role.to_s)
+    role_id == role.try(:id)
+  end
 end

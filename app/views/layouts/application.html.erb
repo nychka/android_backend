@@ -51,6 +51,7 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
+      <%= render partial: "shared/flash_messages", flash: flash %> 
       <%= yield %>
     </div>
   </div>

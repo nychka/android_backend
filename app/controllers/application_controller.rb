@@ -3,11 +3,16 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/json' }
-  acts_as_token_authentication_handler_for User, except: [:index]
+  acts_as_token_authentication_handler_for User, except: [:index, :show]
   helper_method :available_locales
   respond_to :json, :html
   before_action :set_response
   before_action :set_locale, only: [:index]
+
+  # Catching exceptions from Cancan
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to :root, { flash: { error: exception.message } }
+  end
 
   protected
   def markdown(string)

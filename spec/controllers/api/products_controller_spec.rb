@@ -23,7 +23,7 @@ describe ProductsController, type: :controller do
           expect(group_item['id']).to eq group.id
         end
         it "shows attribute :owner in reponse" do
-          user = login_user
+          user = login_user(:user)
           products = FactoryGirl.create_list(:product, 2, user_id: user.id)
           get :index, format: :json
           data = JSON.parse(response.body)
@@ -76,7 +76,7 @@ describe ProductsController, type: :controller do
       end
       context "authorized request" do
         it "gets a list of products together with system" do
-          user = login_user
+          user = login_user(:user)
           user_products = FactoryGirl.create_list(:product, 3, user_id: user.id).map do |product|
             ProductSerializer.new(product).attributes.stringify_keys
           end
@@ -100,7 +100,7 @@ describe ProductsController, type: :controller do
       end
       context "authorized request" do
         it "creates product" do
-          user = login_user
+          user = login_user(:user)
           product = FactoryGirl.attributes_for(:product, user_id: user.id)
           expect{ post :create, {format: :json, product: product} }.to change(Product, :count).by(1)
           expect(response.status).to eq 201

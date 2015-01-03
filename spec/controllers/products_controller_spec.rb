@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ProductsController, :type => :controller do
   context "REST" do
-    before(:each) { login_user }
+    before(:each) { login_user(:admin) }
 
     it "GET /products" do
       get :index

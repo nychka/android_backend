@@ -1,16 +1,17 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :show, :update, :destroy]
   before_action :set_groups, only: [:new, :edit]
+  load_and_authorize_resource except: [:create]
+  before_action :get_products, only: :index
 
   def index
-    @products = current_user ? Product.system_with_owner(current_user.id) : Product.system
     respond_to do |format|
       unless @response.has_key? :errors
         format.html { render :index }
         format.json { render json: @products, each_serializer: get_serializer_for(:product) }
       else 
         @response[:status] = :unprocessable_entity
-        format.html { render :index, notice: 'Something nasty happened...'}
+        format.html { render :index, flash: { alert: 'Something nasty happened...'}}
         format.json { render json: @response, status: @response[:status] }
       end
     end
@@ -22,10 +23,10 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
+    authorize! :create, @product
     respond_to do |format|
       if @product.save and current_user.products << @product
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to @product, flash: { success: 'Product was successfully created.' }}
         format.json { render :show, status: :created, location: @product }
       else
         @response[:status] = :unprocessable_entity
@@ -51,7 +52,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, flash: { success: 'Product was successfully updated.' }}
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -65,12 +66,23 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, flash: { success: 'Product was successfully destroyed.' }}
       format.json { head :no_content }
     end
   end
 
   private
+    def get_products
+      role = current_user ? current_user.role : :guest
+      case role
+        when :manager || :admin
+          @products = Product.all
+        when :user
+          @products = Product.system_with_owner(current_user.id)
+        else
+          @products = Product.system
+      end
+    end
     def set_product
       @product = Product.find(params[:id])
     end

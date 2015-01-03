@@ -13,13 +13,18 @@
       <tr>
         <td><%= group.title %></td>
         <td><%= link_to 'Show', group %></td>
+        <% if can? :update, group %>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
+        <% end %>
+        <% if can? :destroy, group %>
         <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<% if can? :create, Group %>
 <%= link_to 'New Group', new_group_path %>
+<% end %>

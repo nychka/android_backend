@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  load_and_authorize_resource except: [:create]
   before_action :set_group, only: [:edit, :show, :update, :destroy]
 
   def index
@@ -15,7 +16,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    authorize! :create, @group
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
