@@ -1,0 +1,18 @@
+<div class="product-wrapper">
+  <div class="product <%= 'system' unless product.owner %>">
+    <div class="controls">
+      <% if can? :update, product %>
+        <%= link_to 'Edit', edit_product_path(product) %>
+      <% end %>
+      <% if can? :destroy, product %>
+        <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
+    <div class="calories"><%= product.calories %></div>
+    <!-- <div class="background"><%= product.image %></div> -->
+    <!-- <span class="carbohydrates"><%= product.carbohydrates %></span> -->
+    <!-- <span class="proteins"><%= product.proteins %></span> -->
+    <!-- <span class="fats"><%= product.fats %></span> -->
+  </div>
+  <div class="title"><%= product.title.any %></div>
+</div>

@@ -1,4 +1,4 @@
-## 0.0.3 / Unreleased
+## 0.0.4 / Unreleased
 ### API
 - add common response format
 
@@ -6,6 +6,11 @@
 - design product page
 - design group page
 - add icon for group
+- add sorting by system's products and user's
+
+## 0.0.3 / 2014-04-15
+### Admin
+- add pagination
 
 ## 0.0.2 / 2014-03-15
 ### Admin

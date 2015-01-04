@@ -14,4 +14,48 @@
  *= require_tree .
  *= require_self
  */
-.system {background-color: orange;}
+.system {
+  border: 1px dashed #696767 !important;
+  background-color: whitesmoke;
+}
+
+/*products*/
+.product-wrapper {
+  width: 150px;
+  height: 150px;
+  padding: 20px;
+  float: left;
+  margin: 10px;
+  position: relative;
+}
+.product {
+  /*background-color: whitesmoke;*/
+  border: 1px solid #CCC;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+.create_new {
+  background-color: rgb(122, 165, 199) !important;
+  text-align: center;
+  padding-top: 25%;
+  font-size: 50px;
+  color: white;
+  font-weight: bold;
+}
+.pagination_panel {
+  width: 300px;
+  position: relative;
+  margin: 0 auto;
+}
+.title {
+  text-align: center;
+}
+.calories {
+  text-align: center;
+  padding-top: 15px;
+}
+.calories::after {
+  content: 'c/100g';
+}
+/*products end*/

@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   multilang :title
   belongs_to :group
   belongs_to :user
+  self.per_page = 10
 
   default_scope { order('created_at desc') }
   scope :system,      ->{ where('user_id = 0') }
