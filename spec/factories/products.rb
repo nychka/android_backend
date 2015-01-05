@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :product do
     title_en      { Faker::Lorem.word }
-    title_ua      { Faker::Lorem.word }
+    #title_ua      { Faker::Lorem.word }
     calories      { rand(100) }
     fats          { rand(100) }
     proteins      { rand(100) }
@@ -12,7 +12,7 @@ FactoryGirl.define do
   end
    factory :system_product, class: Product do
     title_en      { Faker::Lorem.word }
-    title_ua      { Faker::Lorem.word }
+    #title_ua      { Faker::Lorem.word }
     calories      { rand(100) }
     fats          { rand(100) }
     proteins      { rand(100) }

@@ -9,6 +9,13 @@ class Product < ActiveRecord::Base
   scope :system_with_owner, ->(user_id){ where('user_id = 0 OR user_id = ?', user_id) }
   scope :by_users,    ->{ where('user_id > 0') }
 
+  validates :title, presence: true, format: { with: /[a-zа-яїєь]{2,}/ }
+  validates :user_id,  presence: true
+  validates :calories, presence: true, format: { with: /[0-9]+(\.[0-9]+)?/ }
+  validates :proteins, presence: true, format: { with: /[0-9]+(\.[0-9]+)?/ }
+  validates :fats, presence: true, format: { with: /[0-9]+(\.[0-9]+)?/ }
+  validates :carbohydrates, presence: true, format: { with: /[0-9]+(\.[0-9]+)?/ }
+
   def owner
     user_id && user_id > 0
   end
