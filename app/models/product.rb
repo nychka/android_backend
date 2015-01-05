@@ -20,4 +20,14 @@ class Product < ActiveRecord::Base
       where(nil)
     end
   end
+  def self.show(show)
+    case show
+      when 'system'
+        self.system
+      when 'by_users'
+        self.by_users
+      else
+        where(nil)
+    end
+  end
 end

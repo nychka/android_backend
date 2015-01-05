@@ -2,10 +2,10 @@
   <div class="product <%= 'system' unless product.owner %>">
     <div class="controls">
       <% if can? :update, product %>
-        <%= link_to 'Edit', edit_product_path(product) %>
+        <%= link_to '', edit_product_path(product), class: 'glyphicon glyphicon-edit edit' %>
       <% end %>
       <% if can? :destroy, product %>
-        <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to '', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-remove delete' %>
       <% end %>
     </div>
     <div class="calories"><%= product.calories %></div>

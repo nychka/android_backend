@@ -42,6 +42,10 @@ en:
     fats: 'fats'
     proteins: 'proteins'
     carbohydrates: 'carbohydrates'
+    all: 'All'
+    system: 'System products'
+    by_users: "User's products"
+    filter: 'Filter'
   no_products: 'No products'
   no_products_found: 'No products found. Try to search again'
 

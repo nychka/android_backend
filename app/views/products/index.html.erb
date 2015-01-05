@@ -1,11 +1,34 @@
 <% if current_user %>
 <nav class="navbar navbar-default">
+  <div class="container-fluid">
   <form class="navbar-form navbar-left" role="search">
     <div class="form-group">
       <input type="search" name="search" value="<%= params[:search] %>" class="form-control" placeholder="Search">
+      <% if params[:show] %><input type="hidden" name="show" value="<%= params[:show] %>" /><% end %>
     </div>
-    <button type="submit" class="btn btn-default"><!-- span class="glyphicon glyphicon-search"></span --><%= t('search') %></button>
+    <button type="submit" class="btn btn-default">
+      <%= t('search') %>
+      <span class="glyphicon glyphicon-search"></span>
+    </button>
   </form>
+  <ul class="nav navbar-nav navbar-right">
+    <% if params[:show] %>
+      <li>
+        <%= link_to(products_path) do %>
+          <%= params[:show] %><div class="glyphicon glyphicon-remove"></div>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+      <%= t('product.filter') %><span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="?show=system" class="btn btn-link"><%= t('product.system') %></a></li>
+        <li><a href="?show=by_users" class="btn btn-link"><%= t('product.by_user') %></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
 </nav>
 <% end %>
 <div class="clearfix"></div>

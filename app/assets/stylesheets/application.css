@@ -15,7 +15,6 @@
  *= require_self
  */
 .system {
-  border: 1px dashed #696767 !important;
   background-color: whitesmoke;
 }
 
@@ -38,8 +37,8 @@
 .create_new {
   background-color: rgb(122, 165, 199) !important;
   text-align: center;
-  padding-top: 25%;
-  font-size: 50px;
+  padding-top: 33%;
+  font-size: 30px;
   color: white;
   font-weight: bold;
 }
@@ -58,4 +57,12 @@
 .calories::after {
   content: 'c/100g';
 }
+.delete {
+  float: right;
+}
+.delete:hover {
+  color: darkred !important;
+  background: none;
+}
+.edit {float: left;}
 /*products end*/
