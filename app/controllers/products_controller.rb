@@ -82,9 +82,9 @@ class ProductsController < ApplicationController
     def get_products
       if current_user
         if current_user.manager? || current_user.admin?
-          @products = Product.all.paginate(page: params[:page])
+          @products = Product.all.paginate(page: params[:page]).search(params[:search])
         else
-          @products = Product.system_with_owner(current_user.id).paginate(page: params[:page])
+          @products = Product.system_with_owner(current_user.id).paginate(page: params[:page]).search(params[:search])
         end 
       else
          @products = Product.system.paginate(page: params[:page])

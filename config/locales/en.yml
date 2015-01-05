@@ -42,4 +42,6 @@ en:
     fats: 'fats'
     proteins: 'proteins'
     carbohydrates: 'carbohydrates'
+  no_products: 'No products'
+  no_products_found: 'No products found. Try to search again'
 

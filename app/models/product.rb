@@ -12,4 +12,12 @@ class Product < ActiveRecord::Base
   def owner
     user_id && user_id > 0
   end
+
+  def self.search(search)
+    if search
+      where('CAST(avals(title) AS text) LIKE ?', "%#{search}%")
+    else
+      where(nil)
+    end
+  end
 end
