@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
   def set_locale
     begin
-      I18n.locale = params[:lang].present? ? params[:lang] : I18n.default_locale
+      ProductSerializer.set_current_locale = params[:lang].present? ? params[:lang] : I18n.default_locale
     rescue Exception => e
       @response[:errors] = [e.message]
       @response[:status] = :unprocessable_entity

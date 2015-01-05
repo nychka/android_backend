@@ -1,23 +1,29 @@
-## 0.0.4 / Unreleased
+## 0.0.5 / Unreleased
 ### API
 - add common response format
 
 ### Admin
-- design product page
-- design group page
+- design new product page
+- design groups page
+- design new group page
 - add icon for group
-- add sorting by system's products and user's
 
-## 0.0.3 / 2014-04-15
+## 0.0.4 / 2014-01-05
+### Admin
+- add search
+- add filtering by system products and users'
+- updated products page
+
+## 0.0.3 / 2014-01-04
 ### Admin
 - add pagination
 
-## 0.0.2 / 2014-03-15
+## 0.0.2 / 2014-01-03
 ### Admin
 - add roles: user, manager, admin
 - CRUD system products
 
-## 0.0.1 / 2014-02-15
+## 0.0.1 / 2014-01-02
 ### API
 - system products are available for unauthorized users
 - add localization for products and groups
